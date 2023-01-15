@@ -1,8 +1,14 @@
 #!/bin/bash
 
-# don't leave the <> in the below parts
-X500=<your X500>
-LAB_MACHINE=<desired lab machine>  # e.g. csel-kh1250-37.cselabs.umn.edu
+if [ $# -ne 2 ]
+then
+    echo "Usage: ./$0 <X500> <LAB_MACHINE>"
+    exit 1
+fi
 
-ssh-keygen -t rsa -b 2048 -f ~/.ssh/id_rsa -q -N "" 
-ssh-copy-id -i ~/.ssh/id_rsa.pub $X500@$LAB_MACHINE
+ssh-keygen -t ed25519 -q -N ""
+
+chmod 700 ~/.ssh
+chmod 600 ~/.ssh/id_ed25519*
+
+ssh-copy-id $1@$2
