@@ -12,7 +12,8 @@ rem Generate a new key
 ssh-keygen -t ed25519 -f %USERPROFILE%\.ssh\id_ed25519 -N ""
 
 rem Copy the key to the remote host
-ssh-copy-id -i %USERPROFILE%\.ssh\id_ed25519.pub %X500%@%LAB_MACHINE%
+rem ssh-copy-id -i %USERPROFILE%\.ssh\id_ed25519.pub %X500%@%LAB_MACHINE%
+scp %USERPROFILE%\.ssh\id_ed25519.pub %X500%@%LAB_MACHINE%:~/.ssh/authorized_keys
 
 rem Create the ssh config file
 echo "Host %LAB_MACHINE%" > %USERPROFILE%\.ssh\config
